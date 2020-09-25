@@ -1,0 +1,31 @@
+{
+  "name": "strapi-plugin-notification",
+  "version": "1.0.0",
+  "description": "This is the description of the plugin.",
+  "strapi": {
+    "name": "notification",
+    "icon": "bell",
+    "description": "Description of notification plugin."
+  },
+  "dependencies": {},
+  "author": {
+    "name": "Vanessa Pasque",
+    "email": "lith@amykron.com",
+    "url": ""
+  },
+  "maintainers": [
+    {
+      "name": "Vanessa Pasque",
+      "email": "lith@amykron.com",
+      "url": ""
+    }
+  ],
+  "dependencies": {
+    "expo-server-sdk": "3.6.0"
+  },
+  "engines": {
+    "node": "^10.0.0",
+    "npm": ">= 6.0.0"
+  },
+  "license": "MIT"
+}
