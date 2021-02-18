@@ -73,14 +73,27 @@ Enable the plugin's cron :
     },
 ```
 
-### 3. Build and re-launch Strapi
+### 3. Edit `users-permissions` models settings
+
+- Copy the file [User.settings.json](https://raw.githubusercontent.com/strapi/strapi/master/packages/strapi-plugin-users-permissions/models/User.settings.json) under `extensions/users-permissions/models/User.settings.json`
+- Add the new attributes, at the end :
+
+```json
+    "expotokens": {
+      "via": "user",
+      "plugin": "notification-expo",
+      "collection": "expotoken"
+    }
+```
+
+### 4. Build and re-launch Strapi
 
 ```shell
 strapi build --clean
 strapi dev
 ```
 
-### 4. Enjoy the administration panel
+### 5. Enjoy the administration panel
 
 - List of all notifications (with pagination)
 ![Preview BO](assets/preview_bo_strapi.png)
