@@ -52,6 +52,9 @@ module.exports = {
    */
 
   async create(data) {
+    const users = await usersByPlatform.get(data);
+    data.total = users.length;
+
     const isDraft = contentTypesUtils.isDraft(
       data,
       strapi.plugins['notification-expo'].models.exponotification
@@ -63,7 +66,6 @@ module.exports = {
       { isDraft }
     );
 
-    const users = await usersByPlatform.get(data);
     return strapi
       .query('exponotification', 'notification-expo')
       .create({ ...validData, users, total: users.length });
