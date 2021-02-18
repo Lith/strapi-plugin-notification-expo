@@ -54,7 +54,6 @@ const HomePage = () => {
         pagination,
       });
     } catch (err) {
-      console.error(err.response);
       strapi.notification.toggle({
         type: 'warning',
         message: { id: 'notification.error' },
@@ -106,7 +105,6 @@ const HomePage = () => {
    * @todo - implement todo
    */
   const deleteNotification = (data) => {
-    console.warn(`Remove ${data.id}  ? `);
     strapi.notification.toggle({
       type: 'warning',
       message: 'Not implemented yet',
