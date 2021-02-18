@@ -2,6 +2,21 @@ import getTrad from '../../utils/getTrad';
 
 const getForm = () => {
   return {
+    status: {
+      styleName: 'col-6',
+      description: getTrad('form.status.description'),
+      label: getTrad('form.status.label'),
+      type: 'select',
+      options: [
+        getTrad('form.status.option.pending'),
+        getTrad('form.status.option.waiting'),
+        getTrad('form.status.option.canceled'),
+        getTrad('form.status.option.finished'),
+        getTrad('form.status.option.failed'),
+      ],
+      value: getTrad('form.status.option.pending'),
+      disabled: true
+    },
     platform: {
       styleName: 'col-12',
       description: getTrad('form.platform.description'),

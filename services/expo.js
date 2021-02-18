@@ -40,27 +40,21 @@ module.exports = {
       const users = params.users.map((user) => user.id);
       expotokens = await strapi
         .query('expotoken', 'notification-expo')
-        .find({ user_in: users }, []);
+        .find({user_in: users}, []);
     }
 
     if (!expotokens || !expotokens.length) return;
 
     await strapi
       .query('exponotification', 'notification-expo')
-      .update({ id: params.id }, { status: 'waiting' });
-    const state = await notificationMessage.send(
+      .update({id: params.id}, {status: 'waiting'});
+    await notificationMessage.send(
       params,
       expotokens.map((item) => item.token)
     );
-    if (state) {
-      await strapi
-        .query('exponotification', 'notification-expo')
-        .update({ id: params.id }, { status: 'finished' });
-    } else {
-      await strapi
-        .query('exponotification', 'notification-expo')
-        .update({ id: params.id }, { status: 'failed' });
-    }
+    await strapi
+      .query('exponotification', 'notification-expo')
+      .update({id: params.id}, {status: 'finished'});
   },
 
   /**

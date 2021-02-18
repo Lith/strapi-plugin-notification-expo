@@ -69,13 +69,12 @@ const EditPage = () => {
   const notificationAlreadySend = useMemo(() => {
     if (entity && entity.published_at && entity.status) {
       if (entity.status !== 'pending') {
-        return true;
-      }
-      const publishedDate = new Date(entity.published_at);
-      const todayDate = new Date();
+        const publishedDate = new Date(entity.published_at);
+        const todayDate = new Date();
 
-      if (publishedDate.getTime() <= todayDate.getTime()) {
-        return true;
+        if (publishedDate.getTime() <= todayDate.getTime()) {
+          return true;
+        }
       }
     }
 
