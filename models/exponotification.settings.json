@@ -8,10 +8,7 @@
   },
   "options": {
     "increments": true,
-    "timestamps": [
-      "created_at",
-      "updated_at"
-    ],
+    "timestamps": ["created_at", "updated_at"],
     "comment": "",
     "draftAndPublish": true
   },
@@ -34,29 +31,19 @@
     },
     "platform": {
       "type": "enumeration",
-      "enum": [
-        "all",
-        "android",
-        "ios"
-      ],
+      "enum": ["all", "android", "ios"],
       "default": "all",
       "required": true
     },
     "status": {
       "type": "enumeration",
-      "enum": [
-        "pending",
-        "waiting",
-        "finished",
-        "canceled",
-        "failed"
-      ],
+      "enum": ["pending", "waiting", "finished", "canceled", "failed"],
       "default": "pending",
       "required": true
     },
     "total": {
       "type": "integer",
-      "default": "0"
+      "default": 0
     },
     "users": {
       "collection": "user",
