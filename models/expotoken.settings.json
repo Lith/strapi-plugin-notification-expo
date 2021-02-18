@@ -8,7 +8,10 @@
   },
   "options": {
     "increments": true,
-    "timestamps": ["created_at", "updated_at"],
+    "timestamps": [
+      "created_at",
+      "updated_at"
+    ],
     "comment": "",
     "draftAndPublish": false
   },
@@ -20,7 +23,10 @@
     },
     "platform": {
       "type": "enumeration",
-      "enum": ["android", "ios"]
+      "enum": [
+        "android",
+        "ios"
+      ]
     },
     "user": {
       "plugin": "users-permissions",
