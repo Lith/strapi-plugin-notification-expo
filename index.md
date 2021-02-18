@@ -63,24 +63,14 @@ This project launch a Cron Task to check every 10 minutes if notification need t
 
 If you want disable cron task on staging or development environment, edit `config/env/development/server.js` and disabled `cron`.
 
-### 2. Enable plugin's cron - edit `config/middleware.js`
-
-Enable the plugin's cron : 
-
-```json
-    expoCron: {
-      enabled: true,
-    },
-```
-
-### 3. Build and re-launch Strapi
+### 2. Build and re-launch Strapi
 
 ```shell
 strapi build --clean
 strapi dev
 ```
 
-### 4. Enjoy the administration panel
+### 3. Enjoy the administration panel
 
 - List of all notifications (with pagination)
 ![Preview BO](assets/preview_bo_strapi.png)
