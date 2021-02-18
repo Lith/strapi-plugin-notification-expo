@@ -1,0 +1,62 @@
+{
+  "name": "strapi-plugin-notification-expo",
+  "version": "1.0.0-beta.1",
+  "description": "(Non-official) Expo notification for Strapi",
+  "keywords": [
+    "strapi",
+    "plugin",
+    "notification",
+    "expo"
+  ],
+  "strapi": {
+    "name": "Notification",
+    "icon": "bell",
+    "description": "(Non-official) Expo notification for Strapi"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "coverage": "nyc npm run test"
+  },
+  "author": {
+    "name": "Vanessa Pasque",
+    "email": "lith@amykron.com"
+  },
+  "maintainers": [
+    {
+      "name": "Vanessa Pasque",
+      "email": "lith@amykron.com"
+    }
+  ],
+  "dependencies": {
+    "dayjs": "^1.10.4",
+    "expo-server-sdk": "3.6.0",
+    "lodash": "^4.17.20",
+    "node-schedule": "^2.0.0",
+    "strapi-utils": "^3.5.0"
+  },
+  "engines": {
+    "node": ">=10.16.0 <=14.x.x",
+    "npm": ">=6.0.0"
+  },
+  "homepage": "https://github.com/Lith/strapi-plugin-notification-expo#readme",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "codecov": "^3.8.1",
+    "eslint": "^7.20.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-redux-saga": "^1.2.1",
+    "nyc": "^15.1.0",
+    "prettier": "^2.2.1",
+    "redux-saga": "^1.1.3"
+  }
+}

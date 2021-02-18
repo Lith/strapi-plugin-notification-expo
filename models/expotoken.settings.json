@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "expotokens",
+  "info": {
+    "name": "expotoken",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": [
+      "created_at",
+      "updated_at"
+    ],
+    "comment": "",
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "token": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "platform": {
+      "type": "enumeration",
+      "enum": [
+        "android",
+        "ios"
+      ]
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "expotokens"
+    }
+  }
+}

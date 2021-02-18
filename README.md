@@ -1,43 +1,76 @@
 # strapi-plugin-notification-expo
 
-This is a plugin of "expo notification" for Strapi. 
+![npm](https://img.shields.io/npm/v/strapi-plugin-notification-expo?style=flat-square)
+![npm](https://img.shields.io/npm/dm/strapi-plugin-notification-expo?style=flat-square)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/Lith/strapi-plugin-notification-expo?style=flat-square)
+![GitHub issues](https://img.shields.io/github/issues/Lith/strapi-plugin-notification-expo?style=flat-square)
+![Gitlab code coverage](https://img.shields.io/gitlab/coverage/Lith/strapi-plugin-notification-expo/master?style=flat-square)
 
-_Working with Strapi 3.\*.\* (beta and stable)_
+**(Non-official)** Strapi plugins to send Expo notifications
 
-### /!\ Example Draft /!\ 
+## Installation
 
-This is an example of implementation, adapt it for your case by copy/paste file (or code needed).
+Install the package from your app root directory
 
-An installable version is work in progress with an administration panel parts.
-
-
-_Just to give inspiration to others_
-
-
-## Expo 
-
-### Requirement 
-
-Install the expo server SDK package  
-
-```shell script
-yarn add expo-server-sdk
+With `npm`
+```shell
+npm install strapi-plugin-notification-expo
+```
+or `yarn`
+```shell
+yarn add strapi-plugin-notification-expo
 ```
 
-### Add expotokens 'model' into Strapi API
+## Introduction
 
-You need to register Expo token before send a notification to a user.
+This plugin allow you to draft & publish Expo notification
 
-This models allow us to save information in database, but you are free to use an other solution.
+### Feature
+- Used `Draft and Publish` Strapi feature
+- Build with [Buffetjs.io](https://www.buffetjs.io/)
+- Follow Strapi rules and requirement
 
-Keep in mind than a user can have many devices, each user can receive notifications on an iPad, Android, iPhone, ...etc
+### Include
+- Administration panel with the list of all Notification, add, planify, edit and publish your notification in a click
+- Automatic publish with a dedicated cron
+- Read-only notification send
 
+### Information
+This plugin will add 3 tables into your project :
+- `expotokens` : list of all Expo tokens (platform, "Expo push token", user)
+- `exponotifications`: list of all Notification with a state
+- `exponotifications_users` : list of all users than will received the notification
 
-### Register token from Expo to Strapi
+## Requirement
+
+### Edit `config/server.js`
+
+This project launch a Cron Task to check every 10 minutes if notification need to be send, so you need to enabled `cron` in `config/server.js` :
+
+```json
+    cron: {
+      enabled: true,
+    },
+```
+
+If you want disable cron task on staging or development environment, edit `config/env/development/server.js` and disabled `cron`.
+
+### Edit `config/middleware.js`
+
+Enable the plugin's cron : 
+
+```json
+    expoCron: {
+      enabled: true,
+    },
+```
+        
+# FAQ
+
+## How to register token from Expo to Strapi ?
 
 In your app, add some code to register the token linked to the user account on Strapi API :
 
-_Be careful, I'm not a React developer, so this code is an ugly example_
 ```typescript
 Permissions
             .askAsync(Permissions.NOTIFICATIONS)
@@ -49,9 +82,9 @@ Permissions
             })
             .then((token) => {
                 return api
-                    .post('/expotokens', {
-                        userId,
-                        token
+                    .post('/notification-expo/expotokens', {
+                        token,
+                        platform: Platform.OS
                     })
                     .catch((err) => {
                         if (err && err.statusCode === 409) {
@@ -67,25 +100,4 @@ Permissions
                     )))
             })
             .catch((err) => dispatch(registerNotificationsTokenFail(err)))
-```
-
-### Send a notification to user
-
-Copy plugins files, adapt the code with your own style.
-
-##### Example with an "inner" notification, use it from existing controller method
-
-```javascript
-...
-    const datasExpo = {
-      customer: userId, // you need to have this information before :)
-      title: '✅ Awesome title',
-      body: 'Content of your notification',
-      data: {
-        url: 'myapp://deeplinking/pages' // useful if you want to redirect customer to the good screen
-      },
-      channelId: `channel_name` // change this with
-    };
-    await strapi.plugins.notification.services.expo.send(ctx, datasExpo);
-...
 ```

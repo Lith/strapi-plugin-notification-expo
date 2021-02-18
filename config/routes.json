@@ -1,0 +1,108 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/expo/send",
+      "handler": "expo.send",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/expo/sendPendingNotification",
+      "handler": "expo.sendPendingNotification",
+      "config": {
+        "policies": ["isAdmin"]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/expotokens",
+      "handler": "expotoken.find",
+      "config": {
+        "policies": ["isAdmin"]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/expotokens/count",
+      "handler": "expotoken.count",
+      "config": {
+        "policies": ["isAdmin"]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/expotokens/:id",
+      "handler": "expotoken.findOne",
+      "config": {
+        "policies": ["isAdmin"]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/expotokens",
+      "handler": "Expotoken.create",
+      "config": {
+        "policies": ["isLogged"]
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/expotokens/:id",
+      "handler": "expotoken.delete",
+      "config": {
+        "policies": ["isAdmin"]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/exponotifications",
+      "handler": "exponotification.find",
+      "config": {
+        "policies": ["isAdmin"]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/exponotifications/count",
+      "handler": "exponotification.count",
+      "config": {
+        "policies": ["isAdmin"]
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/exponotifications/:id",
+      "handler": "exponotification.findOne",
+      "config": {
+        "policies": ["isAdmin"]
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/exponotifications/:id",
+      "handler": "exponotification.update",
+      "config": {
+        "policies": ["isAdmin"]
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/exponotifications",
+      "handler": "exponotification.create",
+      "config": {
+        "policies": ["isAdmin"]
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/exponotifications/:id",
+      "handler": "exponotification.delete",
+      "config": {
+        "policies": ["isAdmin"]
+      }
+    }
+  ]
+}
