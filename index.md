@@ -1,37 +1,103 @@
-## Welcome to GitHub Pages
+# strapi-plugin-notification-expo
 
-You can use the [editor on GitHub](https://github.com/Lith/strapi-plugin-notification-expo/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+![npm](https://img.shields.io/npm/v/strapi-plugin-notification-expo?style=flat-square)
+![npm](https://img.shields.io/npm/dm/strapi-plugin-notification-expo?style=flat-square)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/Lith/strapi-plugin-notification-expo?style=flat-square)
+![GitHub issues](https://img.shields.io/github/issues/Lith/strapi-plugin-notification-expo?style=flat-square)
+![Gitlab code coverage](https://img.shields.io/gitlab/coverage/Lith/strapi-plugin-notification-expo/master?style=flat-square)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+**(Non-official)** Strapi plugins to send Expo notifications
 
-### Markdown
+## Installation
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Install the package from your app root directory
 
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+With `npm`
+```shell
+npm install strapi-plugin-notification-expo
+```
+or `yarn`
+```shell
+yarn add strapi-plugin-notification-expo
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## Introduction
 
-### Jekyll Themes
+This plugin allow you to draft & publish Expo notification
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Lith/strapi-plugin-notification-expo/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+### Feature
+- Used `Draft and Publish` Strapi feature
+- Build with [Buffetjs.io](https://www.buffetjs.io/)
+- Follow Strapi rules and requirement
 
-### Support or Contact
+### Include
+- Administration panel with the list of all Notification, add, planify, edit and publish your notification in a click
+- Automatic publish with a dedicated cron
+- Read-only notification send
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+### Information
+This plugin will add 3 tables into your project :
+- `expotokens` : list of all Expo tokens (platform, "Expo push token", user)
+- `exponotifications`: list of all Notification with a state
+- `exponotifications_users` : list of all users than will received the notification
+
+## Requirement
+
+### Edit `config/server.js`
+
+This project launch a Cron Task to check every 10 minutes if notification need to be send, so you need to enabled `cron` in `config/server.js` :
+
+```json
+    cron: {
+      enabled: true,
+    },
+```
+
+If you want disable cron task on staging or development environment, edit `config/env/development/server.js` and disabled `cron`.
+
+### Edit `config/middleware.js`
+
+Enable the plugin's cron : 
+
+```json
+    expoCron: {
+      enabled: true,
+    },
+```
+        
+# FAQ
+
+## How to register token from Expo to Strapi ?
+
+In your app, add some code to register the token linked to the user account on Strapi API :
+
+```typescript
+Permissions
+            .askAsync(Permissions.NOTIFICATIONS)
+            .then(({status}) => {
+                if (status === 'granted') {
+                    return Notifications.getExpoPushTokenAsync();
+                }
+                return Promise.reject();
+            })
+            .then((token) => {
+                return api
+                    .post('/notification-expo/expotokens', {
+                        token,
+                        platform: Platform.OS
+                    })
+                    .catch((err) => {
+                        if (err && err.statusCode === 409) {
+                            return Promise.resolve();
+                        } else {
+                            return Promise.reject(err);
+                        }
+                    })
+                    .then(() => dispatch(registerNotificationsTokenSuccess(
+                        Notifications.addListener((notification) => {
+                            dispatch(notify(notification))
+                        })
+                    )))
+            })
+            .catch((err) => dispatch(registerNotificationsTokenFail(err)))
+```
