@@ -18,13 +18,13 @@ module.exports = {
    */
 
   async send(ctx, params) {
-    // @todo - manage expo_access_token
-    // let expo = new Expo({ accessToken: process.env.EXPO_ACCESS_TOKEN });
-
     const pushTokens = await strapi.plugins['notification-expo'].services.expotoken.find({
-      user: params.id,
-    });
-    await notificationMessage.send(ctx, params, pushTokens);
+      user: params.user,
+    }, []);
+
+    if (pushTokens) {
+      await notificationMessage.send(params, pushTokens.map((pushToken) => pushToken.token));
+    }
   },
 
   /**
