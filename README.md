@@ -32,11 +32,9 @@ yarn add strapi-plugin-notification-expo
 
 ### Database information
 
-This plugin will add 3 tables into your project :
-- `expotokens` : list of all Expo tokens (platform, "Expo push token", user)
+This plugin will add 2 tables into your project :
+- `expotokens` : list of all Expo tokens (platform, "Expo push token", strapi `user`)
 - `exponotifications`: list of all Notification with a state
-- `exponotifications_users` : list of all users than will received the notification
-
 
 ### 🚀 Features
 
@@ -168,10 +166,10 @@ Permissions
 
 - [Strapi website](http://strapi.io/)
 - [Strapi forum](https://forum.strapi.io/c/packages/10) - ping @Lith
-- [Strapi community on Slack](http://slack.strapi.io) - ping @Lith 
+- [Strapi community on Discord](https://discord.strapi.io) - ping @Lith 
 - [Strapi news on Twitter](https://twitter.com/strapijs)
 
 ## Support
 
-- [Slack](http://slack.strapi.io) (Highly recommended for faster support - ping @Lith)
+- [Discord](http://discord.strapi.io) (Highly recommended for faster support - ping @Lith)
 - [GitHub](https://github.com/Lith/strapi-plugin-notification-expo) (Bug reports, contributions)
